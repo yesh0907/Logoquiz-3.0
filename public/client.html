@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Client | Logoquiz Multiplayer 3.0</title>
+</head>
+<body>
+	<!-- Header -->
+	<!-- /Header -->
+
+	<h1>Welcome to Logoquiz Multiplayer 3.0 Client Interface</h1>
+	<div>
+		<h2 class="score">Points: 0</h2>
+		<div>
+			<h3 class="message"></h3>
+		</div>
+		<form>
+			<label for="">Answer:</label>
+			<input type="text" class="answer" autocomplete="off" placeholder="Answer" />
+			<input type="submit" value="Submit!" />
+		</form>
+	</div>
+
+	<!-- Footer -->
+	<script src="/socket.io/socket.io.js"></script>
+	<script type="text/javascript" src="/js/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/js/client.js"></script>
+	<!-- /Footer -->
+</body>
+</html>
