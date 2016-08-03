@@ -1,21 +1,19 @@
-'use strict';
+$(document).ready(() => {
+	const socket = io();
 
-$(document).ready(function () {
-	var socket = io();
-
-	var images = void 0;
-	var counter = 0;
-	var currentImage = '';
-	var currentAnswer = '';
-	var time = 10;
+	let images;
+	let counter = 0;
+	let currentImage = '';
+	let currentAnswer = '';
+	let time = 10;
 	updateTimerLabel(time);
 
-	var interval = void 0;
+	let interval;
 
 	$.ajax({
 		type: 'POST',
 		url: '/master/images',
-		success: function success(data) {
+		success: (data) => {
 			getImages(data);
 			loadImage(images[counter]);
 			currentImage = images[counter];
@@ -25,7 +23,7 @@ $(document).ready(function () {
 
 	startTimer();
 
-	$('.next-image').click(function () {
+	$('.next-image').click(() => {
 		nextImage(counter);
 	});
 
@@ -34,7 +32,7 @@ $(document).ready(function () {
 	}
 
 	function loadImage(img) {
-		var imageSRC = '/img/' + img;
+		let imageSRC = `/img/${img}`;
 		$('.image').attr('src', imageSRC);
 	}
 
@@ -47,7 +45,7 @@ $(document).ready(function () {
 			clearInterval(interval);
 			updateTimerLabel(0);
 			socket.emit('game is over', true);
-			setTimeout(function () {
+			setTimeout(function() {
 				window.location.href = "/master/game-over";
 			}, 800);
 			return 0;
@@ -57,13 +55,11 @@ $(document).ready(function () {
 		answer = getAnswer(currentImage);
 	}
 
-	function getAnswer(name) {
-		var first = arguments.length <= 1 || arguments[1] === undefined ? false : arguments[1];
-
-		var cleanedName = name.replace(/_/g, " ");
-		var prefix = 2;
-		var suffix = cleanedName.indexOf('.png');
-		var answer = cleanedName.substring(prefix, suffix);
+	function getAnswer(name, first=false) {
+		const cleanedName = name.replace(/_/g, " ");
+		let prefix = 2;
+		let suffix = cleanedName.indexOf('.png');
+		let answer = cleanedName.substring(prefix, suffix);
 		socket.emit('received new answer', { answer: answer, first: first });
 		return answer;
 	}
@@ -74,24 +70,24 @@ $(document).ready(function () {
 
 	function resetTimer() {
 		nextImage(counter);
-		if (counter > images.length - 1) clearInterval(interval);
+		if (counter > images.length - 1)
+			clearInterval(interval);
 		time = 10;
 		updateTimerLabel(time);
 		startTimer();
 	}
 
 	function count() {
-		var _this = this;
-
 		if (time <= 0) {
 			time = 0;
 			clearInterval(interval);
-			setTimeout(function () {
+			setTimeout(() => {
 				resetTimer();
-				clearInterval(_this);
+				clearInterval(this);
 				return 0;
 			}, 1000);
-		} else {
+		}
+		else {
 			--time;
 			updateTimerLabel(time);
 		}
@@ -101,7 +97,7 @@ $(document).ready(function () {
 		$('.time').text(t);
 	}
 
-	$(document).keypress(function (e) {
+	$(document).keypress((e) => {
 		if (e.which == 13) {
 			nextImage(counter);
 		}

@@ -1,24 +1,26 @@
-$(document).ready(() => {
-	const socket = io();
-	let positions = [];
+"use strict";
+
+$(document).ready(function () {
+	var socket = io();
+	var positions = [];
 
 	$.ajax({
 		type: "POST",
 		url: "/master/positions",
-		success: function (data) {
+		success: function success(data) {
 			positions = data;
-			for (let pos in positions) {
-				let team = positions[pos];
-				$('.rankings').append(`<li>${team[0]} with ${team[1]} points!</li>`);
+			for (var pos in positions) {
+				var team = positions[pos];
+				$('.rankings').append("<li>" + team[0] + " with " + team[1] + " points!</li>");
 			}
-			const winner = positions[0];
-			$('.winner').text(`The Winner is ${winner[0]} with ${winner[1]} points!`);
+			var winner = positions[0];
+			$('.winner').text("The Winner is " + winner[0] + " with " + winner[1] + " points!");
 			$('.winner').css('color', 'green');
 			$('.winner').show();
 		}
-	})
+	});
 
-	socket.on('positions', (teams) => {
+	socket.on('positions', function (teams) {
 		positions = teams;
 	});
 });

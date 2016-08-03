@@ -1,12 +1,14 @@
-$(document).ready(() => {
-	const socket = io();
-	let teamName;
-	let positions = [];
+'use strict';
+
+$(document).ready(function () {
+	var socket = io();
+	var teamName = void 0;
+	var positions = [];
 
 	$.ajax({
 		type: 'POST',
 		url: '/client/team-name',
-		success: (data) => {
+		success: function success(data) {
 			teamName = data;
 		}
 	});
@@ -14,46 +16,50 @@ $(document).ready(() => {
 	$.ajax({
 		type: 'POST',
 		url: '/client/positions',
-		success: (data) => {
+		success: function success(data) {
 			positions = data;
 			findPosition(positions, teamName);
 		}
 	});
 
 	function findPosition(positions, teamName) {
-		let i = 1;
-		for (let pos in positions) {
-			let currentPos = positions[pos];
+		var i = 1;
+		for (var pos in positions) {
+			var currentPos = positions[pos];
 
 			if (teamName == currentPos[0]) {
-				let points = currentPos[1];
+				var points = currentPos[1];
 				switch (i) {
-					case 1: {
-						i = "1st";
-						break;
-					}
-					case 2: {
-						i = "2nd";
-						break;
-					}
-					case 3: {
-						i = "3rd";
-						break;
-					}
-					default: {
-						i = `${i}th`;
-						break;
-					}
+					case 1:
+						{
+							i = "1st";
+							break;
+						}
+					case 2:
+						{
+							i = "2nd";
+							break;
+						}
+					case 3:
+						{
+							i = "3rd";
+							break;
+						}
+					default:
+						{
+							i = i + 'th';
+							break;
+						}
 				}
 				$('.message').css('color', 'green');
-				$('.message').text(`Your Team, ${teamName}, came in ${i} place with ${points} points!`);
+				$('.message').text('Your Team, ' + teamName + ', came in ' + i + ' place with ' + points + ' points!');
 				return 0;
 			}
 			i++;
 		}
 	}
 
-	socket.on('positions', (teams) => {
+	socket.on('positions', function (teams) {
 		positions = teams;
 	});
 });

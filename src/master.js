@@ -1,6 +1,4 @@
-'use strict';
-
-$(document).ready(function () {
+$(document).ready(() => {
 	var socket = io();
 	var teams = [];
 
@@ -9,19 +7,19 @@ $(document).ready(function () {
 	function gameReady() {
 		$('.status').text("The Game is about to start!");
 		socket.emit('all teams ready', teams);
-		setTimeout(function () {
+		setTimeout(() => {
 			window.location.href = "/master/game";
 		}, 2000);
 	}
 
-	$(document).keypress(function (e) {
+	$(document).keypress((e) => {
 		if (e.which == 13) {
 			gameReady();
 		}
-	});
+	})
 
-	socket.on('team ready', function (team) {
+	socket.on('team ready', (team) => {
 		teams.push(team);
-		$('.teams').append('<li>' + team + '</li>');
+		$('.teams').append(`<li>${team}</li>`);
 	});
 });

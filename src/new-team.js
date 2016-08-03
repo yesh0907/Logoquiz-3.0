@@ -1,9 +1,7 @@
-'use strict';
-
-$(document).ready(function () {
+$(document).ready(() => {
 	var socket = io();
-	$('form').submit(function () {
-		var teamName = $('.team-name').val();
+	$('form').submit(() => {
+		let teamName = $('.team-name').val();
 		socket.emit('new team', teamName);
 		$('.team-name').val('');
 		$('.success-message').fadeIn('slow');
@@ -13,13 +11,13 @@ $(document).ready(function () {
 			url: '/client/new-team',
 			data: { name: teamName }
 		});
-		setTimeout(function () {
+		setTimeout(() => {
 			window.location.href = "/client/waiting";
 		}, 1300);
 		return false;
 	});
 
-	socket.on('team ready', function (team) {
+	socket.on('team ready', (team) => {
 		socket.emit('team is ready', team);
 	});
 });

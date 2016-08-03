@@ -1,12 +1,10 @@
-'use strict';
-
-$(document).ready(function () {
-	var socket = io();
-	var currentAnswer = void 0;
-	var gotAnswer = false;
-	var score = 0;
-	var time = void 0;
-	var answered = '';
+$(document).ready(() => {
+	const socket = io();
+	let currentAnswer;
+	let gotAnswer = false;
+	let score = 0;
+	let time;
+	let answered = '';
 
 	$('.message').hide();
 	updateScore(score);
@@ -15,15 +13,15 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			url: '/client/answer',
-			success: function success(data) {
+			success: (data) => {
 				currentAnswer = data;
 				gotAnswer = true;
 			}
 		});
 	}
 
-	$('form').submit(function () {
-		var userAnswer = $('.answer').val().toLowerCase();
+	$('form').submit(() => {
+		let userAnswer = $('.answer').val().toLowerCase();
 		$('.answer').val("");
 
 		if (answered == currentAnswer) {
@@ -36,7 +34,8 @@ $(document).ready(function () {
 			score += 2;
 			updateScore(score);
 			updateDBScore();
-		} else {
+		}
+		else {
 			message("Incorrect!", "error");
 		}
 		answered = currentAnswer;
@@ -48,36 +47,37 @@ $(document).ready(function () {
 			$('.message').css('color', 'green');
 			$('.message').text(text);
 			$('.message').fadeIn("slow");
-			setTimeout(function () {
+			setTimeout(() => {
 				$('.message').fadeOut("slow");
 			}, 800);
-		} else if (type == "error") {
+		}
+		else if (type == "error") {
 			$('.message').css('color', 'red');
 			$('.message').text(text);
 			$('.message').fadeIn("slow");
-			setTimeout(function () {
+			setTimeout(() => {
 				$('.message').fadeOut("slow");
 			}, 800);
 		}
 	}
 
 	function updateScore(score) {
-		$('.score').text('Points: ' + score);
+		$('.score').text(`Points: ${score}`);
 	}
 
 	function updateDBScore() {
 		$.ajax({
 			type: "POST",
-			url: '/client/update-points'
+			url: '/client/update-points',
 		});
 	}
 
 	// Socket Functions
-	socket.on('new answer', function (answer) {
+	socket.on('new answer', (answer) => {
 		currentAnswer = answer;
 	});
 
-	socket.on('game over', function (status) {
+	socket.on('game over', (status) => {
 		if (status) {
 			window.location.href = "/client/game-over";
 		}

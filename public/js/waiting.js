@@ -1,10 +1,12 @@
-$(document).ready(() => {
-	const socket = io();
+'use strict';
 
-	socket.on('all teams are ready', (teams) => {
+$(document).ready(function () {
+	var socket = io();
+
+	socket.on('all teams are ready', function (teams) {
 		$('.status').text("All Teams Are Ready!");
 		console.log("All Teams are ready.");
-		setTimeout(() => {
+		setTimeout(function () {
 			window.location.href = "/client";
 		}, 1300);
 	});
