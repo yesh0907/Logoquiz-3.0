@@ -2,24 +2,56 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/bootstrap/css/bootstrap.min.css">
+	<link rel="apple-touch-icon" sizes="57x57" href="/apple-touch-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/apple-touch-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/apple-touch-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/apple-touch-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/apple-touch-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/apple-touch-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/apple-touch-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon-180x180.png">
+	<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/favicon-194x194.png" sizes="194x194">
+	<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/png" href="/android-chrome-192x192.png" sizes="192x192">
+	<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#303f9f">
+	<meta name="msapplication-TileColor" content="#303f9f">
+	<meta name="msapplication-TileImage" content="/mstile-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<link rel="stylesheet" href="/css/new-team.css">
 	<title>Home | Logoquiz Multiplayer 3.0</title>
 </head>
 <body>
-	<!-- Header -->
-	<!-- /Header -->
-
-	<h1>Hello, Welcome to Logoquiz 3.0!</h1>
-	<div class="success-message" style="color: green;" hidden>Successfully Added Team!</div>
-	<br>
-	<form>
-		<input type="text" class="team-name" placeholder="Team Name!" />
-		<input type="submit" />
-	</form>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<h1 class="text-primary text-center">Welcome to Logoquiz 3.0!</h1>
+			</div>
+		</div>
+		<br>
+		<h4 class="success-message" hidden>Successfully Added Team!</h4>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<label for="team-name" class="col-xs-4 col-lg-2 control-label team-name-label">Team Name:</label>
+				<div class="col-xs-6 col-lg-2">
+					<input type="text" id="team-name" class="form-control team-name" placeholder="Team Name!" autocomplete="off" />
+				</div>
+				<div class="col-xs-2 col-lg-3">
+					<input type="submit" class="btn btn-primary" />
+				</div>
+			</div>
+		</form>
+	</div>
 
 	<!-- Footer -->
 	<script src="/socket.io/socket.io.js"></script>
 	<script type="text/javascript" src="/js/libs/jquery/dist/jquery.min.js"></script>
-	<script type="text/javascript" src="/js/libs/js-cookie/js.cookie.js"></script>
 	<script src="/js/new-team.js"></script>
 	<!-- /Footer -->
 </body>

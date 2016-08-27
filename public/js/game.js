@@ -19,7 +19,7 @@ $(document).ready(function () {
 			getImages(data);
 			loadImage(images[counter]);
 			currentImage = images[counter];
-			answer = getAnswer(currentImage, true);
+			currentAnswer = getAnswer(currentImage, true);
 		}
 	});
 
@@ -54,7 +54,7 @@ $(document).ready(function () {
 		}
 		loadImage(images[counter]);
 		currentImage = images[counter];
-		answer = getAnswer(currentImage);
+		currentAnswer = getAnswer(currentImage);
 	}
 
 	function getAnswer(name) {

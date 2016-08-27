@@ -1,0 +1,33 @@
+input.form-control.answer-input {
+	width: 1500px;
+	height: 120px;
+    border: 1px solid #ddd;
+    box-shadow: 2px 2px 1px #ddd;
+    font-size: 52px;
+    padding: 25px;
+    margin-bottom: 10px;
+    margin-left: -6%;
+    color: white;
+    background-color: #29B6F6; 
+}
+
+input.form-control.answer-input::-webkit-input-placeholder {
+	color: white;
+}
+
+input.form-control.answer-input::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+}
+
+input.form-control.answer-input:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+}
+
+input.form-control.answer-input:-moz-placeholder { /* Firefox 18- */
+  color: white;
+}
+
+.team-name {
+    padding-left: 4%;
+    margin-top: -4%;
+}

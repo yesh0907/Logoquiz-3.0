@@ -1,0 +1,9 @@
+input[type="text"], input[type="password"] {
+	max-width: 30%;
+}
+
+.text-primary {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 8px;
+	max-width: 400px;
+}

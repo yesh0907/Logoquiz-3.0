@@ -11,11 +11,11 @@ $(document).ready(function () {
 			positions = data;
 			for (var pos in positions) {
 				var team = positions[pos];
-				$('.rankings').append("<li>" + team[0] + " with " + team[1] + " points!</li>");
+				var p = parseInt(pos) + 1;
+				if (pos == 0) $('.rankings').append("<li class=\"list-group-item list-group-item-success\">" + p + ". " + team[0] + " with " + team[1] + " points!</li>");else $('.rankings').append("<li class=\"list-group-item\">" + p + ". " + team[0] + " with " + team[1] + " points!</li>");
 			}
 			var winner = positions[0];
 			$('.winner').text("The Winner is " + winner[0] + " with " + winner[1] + " points!");
-			$('.winner').css('color', 'green');
 			$('.winner').show();
 		}
 	});

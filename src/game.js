@@ -17,7 +17,7 @@ $(document).ready(() => {
 			getImages(data);
 			loadImage(images[counter]);
 			currentImage = images[counter];
-			answer = getAnswer(currentImage, true);
+			currentAnswer = getAnswer(currentImage, true);
 		}
 	});
 
@@ -52,7 +52,7 @@ $(document).ready(() => {
 		}
 		loadImage(images[counter]);
 		currentImage = images[counter];
-		answer = getAnswer(currentImage);
+		currentAnswer = getAnswer(currentImage);
 	}
 
 	function getAnswer(name, first=false) {

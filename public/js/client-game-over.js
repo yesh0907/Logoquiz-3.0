@@ -51,7 +51,6 @@ $(document).ready(function () {
 							break;
 						}
 				}
-				$('.message').css('color', 'green');
 				$('.message').text('Your Team, ' + teamName + ', came in ' + i + ' place with ' + points + ' points!');
 				return 0;
 			}
