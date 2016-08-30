@@ -17,7 +17,7 @@ const rootDir = "./public/"
 
 // Index
 router.get('/', (req, res) => {
-	res.redirect('http://yeshc.me/logoquiz/client/new-team');
+	res.redirect('logoquiz/client/new-team');
 });
 
 /* =============================================
