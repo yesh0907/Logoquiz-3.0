@@ -17,18 +17,18 @@ const rootDir = "./public/"
 
 // Index
 router.get('/', (req, res) => {
-	res.redirect('yeshc.me/logoquiz/client/new-team');
+	res.redirect('http://yeshc.me/logoquiz/client/new-team');
 });
 
 /* =============================================
 				Game Master Interface
    ============================================= */
-router.get('yeshc.me/logoquiz/master/', (req, res) => {
+router.get('http://yeshc.me/logoquiz/master/', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('yeshc.me/logoquiz/master/login');
+		res.redirect('http://yeshc.me/logoquiz/master/login');
 		return 0;
 	}
 	res.sendFile("master.html", { root: rootDir });
