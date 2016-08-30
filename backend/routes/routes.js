@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
 /* =============================================
 				Game Master Interface
    ============================================= */
-router.get('http://yeshc.me/logoquiz/master/', (req, res) => {
+router.get('logoquiz/master/', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
