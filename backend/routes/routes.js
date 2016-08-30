@@ -17,7 +17,7 @@ const rootDir = "./public/"
 
 // Index
 router.get('/', (req, res) => {
-	res.redirect('logoquiz/client/new-team');
+	res.redirect('/logoquiz/client/new-team');
 });
 
 /* =============================================
@@ -171,7 +171,7 @@ router.get('/master/reset', (req, res) => {
    ============================================= */
 
 // Client Interface
-router.get('/client', (req, res) => {
+router.get('/logoquiz/client', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 
@@ -183,10 +183,10 @@ router.get('/client', (req, res) => {
 });
 
 // New Team
-router.get('/client/new-team', (req, res) => {
+router.get('/logoquiz/client/new-team', (req, res) => {
 	res.sendFile("new-team.html", { root: rootDir });
 });
-router.post('/client/new-team', (req, res) => {
+router.post('/logoquiz/client/new-team', (req, res) => {
 	let session = req.session;
 	session.validTeam = true;
 	session.teamName = req.body.name;
