@@ -17,25 +17,25 @@ const rootDir = "./public/"
 
 // Index
 router.get('/', (req, res) => {
-	res.redirect('/client/new-team');
+	res.redirect('yeshc.me/logoquiz/client/new-team');
 });
 
 /* =============================================
 				Game Master Interface
    ============================================= */
-router.get('/master', (req, res) => {
+router.get('yeshc.me/logoquiz/master/', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('/master/login');
+		res.redirect('yeshc.me/logoquiz/master/login');
 		return 0;
 	}
 	res.sendFile("master.html", { root: rootDir });
 });
 
 // Login
-router.get('/master/login', (req, res) => {
+router.get('yeshc.me/logoquiz/master/login', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
@@ -45,7 +45,7 @@ router.get('/master/login', (req, res) => {
 	}
 	res.sendFile("login.html", { root: rootDir });
 });
-router.post('/master/login', (req, res) => {
+router.post('yeshc.me/logoquiz/master/login', (req, res) => {
 	let session = req.session;
 
 	let username = req.body.username;
@@ -54,7 +54,7 @@ router.post('/master/login', (req, res) => {
 	User.findOne({ username: username }, (err, user) => {
 		if (err) {
 			console.log("ERROR:", err);
-			res.redirect("/master/login");
+			res.redirect("yeshc.me/logoquiz/master/login");
 		}
 		else {
 			let hash = user.password;
@@ -62,11 +62,11 @@ router.post('/master/login', (req, res) => {
 				if (match) {
 					session.active = true;
 					console.log("Logged In!");
-					res.redirect('/master');
+					res.redirect('yeshc.me/logoquiz/master');
 				}
 				else {
 					console.log("Failed to Login");
-					res.redirect('/master/login');
+					res.redirect('yeshc.me/logoquiz/master/login');
 				}
 			});
 		}
@@ -74,19 +74,19 @@ router.post('/master/login', (req, res) => {
 });
 
 // Game
-router.get('/master/game', (req, res) => {
+router.get('yeshc.me/logoquiz/master/game', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('/master');
+		res.redirect('yeshc.me/logoquiz/master');
 		return 0;
 	}
 	res.sendFile('game.html', { root: rootDir });
 });
 
 // Read all Image Files
-router.post('/master/images', (req, res) => {
+router.post('yeshc.me/logoquiz/master/images', (req, res) => {
 	fs.readdir('./public/img', (err, files) => {
 		const pics = files.filter((val) => {
 			return val.indexOf('.png') > -1
@@ -101,14 +101,14 @@ router.get('/master/game-over', (req, res) => {
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('/master');
+		res.redirect('yeshc.me/logoquiz/master');
 		return 0;
 	}
 	res.sendFile('master-game-over.html', { root: rootDir });
 });
 
 // Get Positions
-router.post('/master/positions', (req, res) => {
+router.post('yeshc.me/logoquiz/master/positions', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 

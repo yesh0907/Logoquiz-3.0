@@ -153,6 +153,6 @@ io.on('connection', (socket) => {
 });
 
 // Setup HTTP Server Listen
-http.listen(8080, () => {
+http.listen(8677, '10.132.4.187', () => {
 	console.log('Listening on http://localhost:8080');
 });
