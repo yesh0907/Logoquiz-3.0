@@ -4,7 +4,7 @@ $(document).ready(() => {
 
 	$.ajax({
 		type: "POST",
-		url: "/master/positions",
+		url: "/logoquiz/master/positions",
 		success: function (data) {
 			positions = data;
 			for (let pos in positions) {

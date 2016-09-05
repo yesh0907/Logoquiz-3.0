@@ -56,7 +56,7 @@ $(document).ready(() => {
 	// Get team name
 	$.ajax({
 		type: 'POST',
-		url: '/client/team-name',
+		url: '/logoquiz/client/team-name',
 		success: (name) => {
 			$('.team-name').text(`Team Name: ${name}`);
 		}
@@ -74,7 +74,7 @@ $(document).ready(() => {
 	if (!gotAnswer) {
 		$.ajax({
 			type: 'POST',
-			url: '/client/answer',
+			url: '/logoquiz/client/answer',
 			success: (data) => {
 				currentAnswer = data;
 				gotAnswer = true;
@@ -132,7 +132,7 @@ $(document).ready(() => {
 	function updateDBScore() {
 		$.ajax({
 			type: "POST",
-			url: '/client/update-points',
+			url: '/logoquiz/client/update-points',
 		});
 	}
 
@@ -143,7 +143,7 @@ $(document).ready(() => {
 
 	socket.on('game over', (status) => {
 		if (status) {
-			window.location.href = "/client/game-over";
+			window.location.href = "/logoquiz/client/game-over";
 		}
 	});
 });

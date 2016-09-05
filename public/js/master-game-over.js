@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 	$.ajax({
 		type: "POST",
-		url: "/master/positions",
+		url: "/logoquiz/master/positions",
 		success: function success(data) {
 			positions = data;
 			for (var pos in positions) {

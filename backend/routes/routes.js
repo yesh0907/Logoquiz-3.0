@@ -16,36 +16,36 @@ const User = require('../models/User.js');
 const rootDir = "./public/"
 
 // Index
-router.get('/', (req, res) => {
+router.get('/logoquiz/', (req, res) => {
 	res.redirect('/logoquiz/client/new-team');
 });
 
 /* =============================================
 				Game Master Interface
    ============================================= */
-router.get('logoquiz/master/', (req, res) => {
+router.get('/logoquiz/master/', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('http://yeshc.me/logoquiz/master/login');
+		res.redirect('/logoquiz/master/login');
 		return 0;
 	}
 	res.sendFile("master.html", { root: rootDir });
 });
 
 // Login
-router.get('yeshc.me/logoquiz/master/login', (req, res) => {
+router.get('/logoquiz/master/login', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (active) {
-		res.redirect('/master');
+		res.redirect('/logoquiz/master');
 		return 0;
 	}
 	res.sendFile("login.html", { root: rootDir });
 });
-router.post('yeshc.me/logoquiz/master/login', (req, res) => {
+router.post('/logoquiz/master/login', (req, res) => {
 	let session = req.session;
 
 	let username = req.body.username;
@@ -54,7 +54,7 @@ router.post('yeshc.me/logoquiz/master/login', (req, res) => {
 	User.findOne({ username: username }, (err, user) => {
 		if (err) {
 			console.log("ERROR:", err);
-			res.redirect("yeshc.me/logoquiz/master/login");
+			res.redirect("/logoquiz/master/login");
 		}
 		else {
 			let hash = user.password;
@@ -62,31 +62,42 @@ router.post('yeshc.me/logoquiz/master/login', (req, res) => {
 				if (match) {
 					session.active = true;
 					console.log("Logged In!");
-					res.redirect('yeshc.me/logoquiz/master');
+					res.redirect('/logoquiz/master');
 				}
 				else {
 					console.log("Failed to Login");
-					res.redirect('yeshc.me/logoquiz/master/login');
+					res.redirect('/logoquiz/master/login');
 				}
 			});
 		}
 	});
 });
+router.post('/logoquiz/master/signup', (req, res) => {
+	let hash = bcrypt.hashSync("r5crudRe0389221", 10);
+	const newUser = new User({ username: 'root', password: hash });
+	newUser.save((err, user) => {
+		if (err)
+			console.log("ERROR:", err);
+		else {
+			console.log("User created!");
+		}
+	})
+});
 
 // Game
-router.get('yeshc.me/logoquiz/master/game', (req, res) => {
+router.get('/logoquiz/master/game', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('yeshc.me/logoquiz/master');
+		res.redirect('/logoquiz/master');
 		return 0;
 	}
 	res.sendFile('game.html', { root: rootDir });
 });
 
 // Read all Image Files
-router.post('yeshc.me/logoquiz/master/images', (req, res) => {
+router.post('/logoquiz/master/images', (req, res) => {
 	fs.readdir('./public/img', (err, files) => {
 		const pics = files.filter((val) => {
 			return val.indexOf('.png') > -1
@@ -96,19 +107,19 @@ router.post('yeshc.me/logoquiz/master/images', (req, res) => {
 });
 
 // Game Over
-router.get('/master/game-over', (req, res) => {
+router.get('/logoquiz/master/game-over', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
 	if (!active) {
-		res.redirect('yeshc.me/logoquiz/master');
+		res.redirect('/logoquiz/master');
 		return 0;
 	}
 	res.sendFile('master-game-over.html', { root: rootDir });
 });
 
 // Get Positions
-router.post('yeshc.me/logoquiz/master/positions', (req, res) => {
+router.post('/logoquiz/master/positions', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
@@ -128,7 +139,7 @@ router.post('yeshc.me/logoquiz/master/positions', (req, res) => {
 });
 
 // Reset Game
-router.get('/master/reset', (req, res) => {
+router.get('/logoquiz/master/reset', (req, res) => {
 	let session = req.session;
 	let active = session.active;
 
@@ -161,7 +172,9 @@ router.get('/master/reset', (req, res) => {
 		}
 	});
 
-	res.redirect("/master");
+	console.log("Database Cleared");
+
+	res.redirect("/logoquiz/master");
 });
 /* ======================================= */
 
@@ -176,7 +189,7 @@ router.get('/logoquiz/client', (req, res) => {
 	let validTeam = session.validTeam;
 
 	if (!validTeam) {
-		res.redirect('/client/new-team');
+		res.redirect('/logoquiz/client/new-team');
 		return 0;
 	}
 	res.sendFile("client.html", { root: rootDir });
@@ -197,19 +210,19 @@ router.post('/logoquiz/client/new-team', (req, res) => {
 });
 
 // Watiting for all players.
-router.get('/client/waiting', (req, res) => {
+router.get('/logoquiz/client/waiting', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 
 	if (!validTeam) {
-		res.redirect('/client/new-team');
+		res.redirect('/logoquiz/client/new-team');
 		return 0;
 	}
 	res.sendFile("waiting.html", { root: rootDir });
 });
 
 // Get the current Answer
-router.post('/client/answer', (req, res) => {
+router.post('/logoquiz/client/answer', (req, res) => {
 	Answer.findOne({}, (err, doc) => {
 		if (err) {
 			console.log(err);
@@ -221,7 +234,7 @@ router.post('/client/answer', (req, res) => {
 });
 
 // Update the clients points in the databse
-router.post('/client/update-points', (req, res) => {
+router.post('/logoquiz/client/update-points', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 
@@ -245,7 +258,7 @@ router.post('/client/update-points', (req, res) => {
 });
 
 // Game over
-router.get('/client/game-over', (req, res) => {
+router.get('/logoquiz/client/game-over', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 
@@ -258,7 +271,7 @@ router.get('/client/game-over', (req, res) => {
 });
 
 // Get Team Name
-router.post('/client/team-name', (req, res) => {
+router.post('/logoquiz/client/team-name', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 
@@ -272,7 +285,7 @@ router.post('/client/team-name', (req, res) => {
 });
 
 // Get Positions
-router.post('/client/positions', (req, res) => {
+router.post('/logoquiz/client/positions', (req, res) => {
 	let session = req.session;
 	let validTeam = session.validTeam;
 

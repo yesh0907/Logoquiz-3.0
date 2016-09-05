@@ -10,11 +10,11 @@ $(document).ready(function () {
 		$('.success-message').fadeOut('slow');
 		$.ajax({
 			type: 'POST',
-			url: '/client/new-team',
+			url: '/logoquiz/client/new-team',
 			data: { name: teamName }
 		});
 		setTimeout(function () {
-			window.location.href = "/client/waiting";
+			window.location.href = "/logoquiz/client/waiting";
 		}, 1300);
 		return false;
 	});

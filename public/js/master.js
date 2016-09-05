@@ -10,7 +10,7 @@ $(document).ready(function () {
 		$('.status').text("The game is starting now!");
 		socket.emit('all teams ready', teams);
 		setTimeout(function () {
-			window.location.href = "/master/game";
+			window.location.href = "/logoquiz/master/game";
 		}, 2000);
 	}
 

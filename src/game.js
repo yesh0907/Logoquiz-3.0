@@ -12,7 +12,7 @@ $(document).ready(() => {
 
 	$.ajax({
 		type: 'POST',
-		url: '/master/images',
+		url: '/logoquiz/master/images',
 		success: (data) => {
 			getImages(data);
 			loadImage(images[counter]);
@@ -32,7 +32,7 @@ $(document).ready(() => {
 	}
 
 	function loadImage(img) {
-		let imageSRC = `/img/${img}`;
+		let imageSRC = `/logoquiz/public/img/${img}`;
 		$('.image').attr('src', imageSRC);
 	}
 
@@ -46,7 +46,7 @@ $(document).ready(() => {
 			updateTimerLabel(0);
 			socket.emit('game is over', true);
 			setTimeout(function() {
-				window.location.href = "/master/game-over";
+				window.location.href = "/logoquiz/master/game-over";
 			}, 800);
 			return 0;
 		}

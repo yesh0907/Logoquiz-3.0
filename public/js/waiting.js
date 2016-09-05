@@ -8,7 +8,7 @@ $(document).ready(function () {
 		$('.status').text("All Teams Are Ready!");
 		console.log("All Teams are ready.");
 		setTimeout(function () {
-			window.location.href = "/client";
+			window.location.href = "/logoquiz/client";
 		}, 1300);
 	});
 });

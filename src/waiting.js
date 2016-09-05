@@ -6,7 +6,7 @@ $(document).ready(() => {
 		$('.status').text("All Teams Are Ready!");
 		console.log("All Teams are ready.");
 		setTimeout(() => {
-			window.location.href = "/client";
+			window.location.href = "/logoquiz/client";
 		}, 1300);
 	});
 });

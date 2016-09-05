@@ -5,7 +5,7 @@ $(document).ready(() => {
 
 	$.ajax({
 		type: 'POST',
-		url: '/client/team-name',
+		url: '/logoquiz/client/team-name',
 		success: (data) => {
 			teamName = data;
 		}
@@ -13,7 +13,7 @@ $(document).ready(() => {
 
 	$.ajax({
 		type: 'POST',
-		url: '/client/positions',
+		url: '/logoquiz/client/positions',
 		success: (data) => {
 			positions = data;
 			findPosition(positions, teamName);
